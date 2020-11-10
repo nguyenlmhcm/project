@@ -1,0 +1,111 @@
+@model DoAn1.ViewModels.BookViewModel
+@{
+    ViewBag.Title = "Books";
+    Layout = "~/Views/Shared/_Layout_Home.cshtml";
+}
+
+<br />
+<div class="container">
+    <div class="row">
+        @* left side *@
+        <div class="col-3 text-center">
+            <form action="~/Book/Index" method="get" class="md-form form-row mb-3">
+                <label>Filter by price:</label>
+                <input name="min" type="number" id="min" class="form-control" placeholder="Min">
+                <input name="max" type="number" id="max" class="form-control" placeholder="Max">
+                <button style="width: 100%" type="submit" class="btn btn-default"><span style="color: #de3241" class="fa fa-search"></span></button>
+            </form>
+            <div class="list-group">
+                <p style="margin-bottom:2px;background-color:#de3241;color:#ffffff" class="list-group-item">AUTHOR</p>
+                @foreach (var author in Model.Authors)
+                {
+                    <a class="list-group-item btn" href="~/Book/Index/?author=@author.Id">@author.Name</a>
+                }
+                <br/>
+                <div class="list-group">
+                    <p style="margin-bottom:2px;background-color:#de3241;color:#ffffff" class="list-group-item">CATEGORIES</p>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <a class="list-group-item btn" href="~/Book/Index/?category=@category.Id">@category.Name</a>
+                    }
+                </div>
+                <br/>
+            </div>
+        </div>
+        
+        @* list books  *@
+        <div class="col-md-9">
+            <form action="~/Book/Index" class="form-group form-inline">
+                <input name="query" style="width: 93%" type="text" class="form-control" placeholder="Search">
+                <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+            </form>
+            <div class="row">
+                @foreach (var book in Model.Books)
+                {
+                    <div class="col-md-3">
+                        <div style="height: 400px;" class="card text-center text-capitalize">
+                            <a href="~/Book/Details/@book.Id"><img src="~/Images/Books/@book.Image" class="card-img-top"></a>
+                            <div style="margin: 0; padding: 0;" class="card-body">
+                                <h5 style="margin: 0; padding: 0;overflow: hidden;" class="card-title text-primary">@book.Name</h5>
+                                <p style="margin: 0; padding: 0;"><span class="text-info">Category</span>: @book.Category.Name</p>
+                                <p style="margin: 0; padding: 0;"><span class="text-info">Author</span>: @book.Author.Name</p>
+                                <p style="margin: 0; padding: 0;" class="text-danger">$ @book.Price</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            @* paging *@
+            <div style="width: 100%; margin-left: 200px;">
+                <nav>
+                    <ul class="pagination">
+                        @if (ViewBag.Page == 1)
+                        {
+                            <li class="page-item disabled"><a class="page-link"><span>&laquo;</span></a></li>
+                        }
+                        else
+                        {
+                            int prev = ViewBag.Page - 1;
+                            <li class="page-item"><a class="page-link" href="~/Book/Index/?page=@prev"><span>&laquo;</span></a></li>
+                        }
+                        
+                        @for (int i = 1; i <= ViewBag.Pages; i++)
+                        {
+                            if (i == ViewBag.Page)
+                            {
+                                <li class="page-item active">
+                                    <a class="page-link" href="~/Book/Index/?page=@i">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="~/Book/Index/?page=@i">@i</a>
+                                </li>
+                            }
+                        }
+                        @if (ViewBag.Page == ViewBag.Pages)
+                        {
+                            <li class="page-item disabled"><a class="page-link"><span>&raquo;</span></a></li>
+                        }
+                        else
+                        {
+                            int next = ViewBag.Page + 1;
+                            <li class="page-item"><a class="page-link" href="~/Book/Index/?page=@next"><span>&raquo;</span></a></li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Js *@
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log("ready");
+      $("#home").removeClass("active");
+      $("#book").addClass("active");
+    });
+</script>

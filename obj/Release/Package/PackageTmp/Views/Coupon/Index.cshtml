@@ -1,0 +1,96 @@
+@model System.Collections.Generic.List<DoAn1.Models.Coupon>
+@{
+    ViewBag.Title = "Coupons";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+<div class="container my-5">
+    <h1 class="text-center">Coupons</h1>
+    <div class="modal fade" id="coupon">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title text-center">Add new coupon</h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="~/Coupon/AddCoupon" method="post">
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label" for="book">Code:</label>
+                            <div class="col-10" >
+                                <input class="form-control" type="text" name="code">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label" for="book">Date Start:</label>
+                            <div class="col-10">
+                                <input class="form-control" type="date" name="timeStart">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label" for="book">Date End:</label>
+                            <div class="col-10">
+                                <input class="form-control" type="date" name="timeEnd">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label" for="book">Discounts:</label>
+                            <div class="col-10">
+                                <input class="form-control" type="number" name="percents">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-dark">Add</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="" data-toggle="modal" data-target="#coupon" class="btn btn-primary mb-3" href="">
+        <i style="font-size: 23px;" class="fas fa-plus"></i>
+        Add
+    </a>
+    <table class="table table-bordered text-capitalize text-center" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Date Start</th>
+                <th>Date End</th>
+                <th>Percent</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Code</th>
+                <th>Date Start</th>
+                <th>Date End</th>
+                <th>Percent</th>
+                <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var coupon in Model)
+            {
+                <tr>
+                    <th>@coupon.Code</th>
+                    <th>@coupon.TimeStart.ToString("d")</th>
+                    <th>@coupon.TimeEnd.ToString("d")</th>
+                    <th>@coupon.Percents %</th>
+                    <th>
+                        <a class="btn btn-danger" href="~/Coupon/Remmove/@coupon.Id">Remove</a>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

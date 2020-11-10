@@ -1,0 +1,84 @@
+@model DoAn1.ViewModels.CartDetailVM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<div class="container-fluid my-5">
+    <div class="row">
+        <div class="col-3">
+            <h1 class="text-center">Cart</h1>
+            <h3><span class="text-warning">Name</span>: @Model.Cart.Account.Name</h3>
+            <h4><span class="text-warning">Address</span>: @Model.Cart.Account.Address</h4>
+            <h4><span class="text-warning">Phone</span>: @Model.Cart.Account.Phone</h4>
+            <h4><span class="text-warning">Total Books</span>: @Model.Cart.TotalItem</h4>
+            <p><span class="text-warning">OrderDate</span>: @Model.Cart.DateOrder.ToString("f")</p>
+            @if (@Model.Cart.Coupon.Id != ViewBag.CouponDefault)
+            {
+                <h4><span class="text-warning">Coupon</span>: @Model.Cart.Coupon.Code</h4>
+                <h4><span class="text-warning">Discount</span>: @Model.Cart.Coupon.Percents</h4>                
+            }
+            <h2 class="text-center text-danger">$ @Model.Cart.TotalPrice</h2>
+            @if (!Model.Cart.IsShiped)
+            {
+                <a style="margin-left: 150px;" href="~/Cart/Shiped/@Model.Cart.Id" class="btn btn-dark">Ship it</a>
+            }
+            else
+            {
+                <p class="text-center">Shiped !!!</p>
+            }
+        </div>
+        <div class="col-9">
+            <!-- DataTables -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Books
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-capitalize text-center" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            @foreach (var cartDetail in Model.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        <a class="text-decoration-none" href="~/Book/Details/@cartDetail.BookId">
+                                            <img style="height: 100px;" src="~/Images/Books/@cartDetail.Book.Image" alt="">
+                                        </a>
+                                    </td>
+                                    <td>@cartDetail.Book.Name</td>
+                                    <td>@cartDetail.Quantity</td>
+                                    <td>@cartDetail.Book.Price</td>
+                                    <td>@{ var total = cartDetail.Book.Price * @cartDetail.Quantity; } $ @total</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a style="margin-left: 400px;" href="~/Admin" class="btn-link my-3 text-dark">Back to DashBoard</a>
+    </div>
+   
+</div>

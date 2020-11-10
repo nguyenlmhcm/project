@@ -1,0 +1,61 @@
+@using DoAn1.Models
+@model IEnumerable<DoAn1.ViewModels.CartDetailVM>
+
+@{
+    var acc = Session["Account"] as Account;
+    ViewBag.Title = acc.Name;
+    Layout = "~/Views/Shared/_Layout_Home.cshtml";
+}
+
+<div style="min-height: 20vh;" class="container my-5">
+    <h1 class="text-center">Welcome @acc.UserName !!</h1>
+    <a style="margin-left: 500px;" class="btn btn-dark" href="~/Authentication/Logout">Logout</a>
+    @foreach (var cart in Model)
+    {
+        <div class="col">
+            <p>Date: @cart.Cart.DateOrder.ToString("d") | 
+                <span class="text-danger">Total: $@cart.Cart.TotalPrice</span>
+            </p>
+            @if (cart.Cart.CouponId != 2)
+            {
+                <p>Coupon: @cart.Cart.Coupon.Code <span>Discount: @cart.Cart.Coupon.Percents %</span></p>
+            }
+            @if (!cart.Cart.IsShiped)
+            {
+                <p class="text-center text-danger">It's on the way !!</p>
+            }
+            else
+            {
+                <p>Shiped !!</p>
+            }
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in @cart.Items)
+                {
+                    <tr>
+                        <th>
+                            <a href="~/Book/Details/@item.BookId"><img style="height: 100px;" src="~/Images/Books/@item.Book.Image" alt=""></a>
+                        </th>
+                        <td>@item.Book.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>
+                            @{ var total = item.Quantity * item.Book.Price; }
+                            $ @total
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            <hr>
+        </div>
+    }
+</div>
+

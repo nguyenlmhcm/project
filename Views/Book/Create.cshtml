@@ -1,0 +1,47 @@
+@model DoAn1.ViewModels.BookViewModel
+
+@{
+    ViewBag.Title = "Create Book";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<div class="container my-5">
+    <h1 class="text-center">Create A Book !</h1>
+    <form action="~/Book/SaveBook" method="post" enctype="multipart/form-data">
+        <input type="number" name="id" value="@Model.Book.Id" style="display: none;">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="@Model.Book.Name" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" name="price" value="@Model.Book.Price" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" name="description" value="@Model.Book.Description" required>
+        </div>
+        <div class="form-group">
+            <label for="review">Review</label>
+            <textarea type="text" class="form-control" id="review" name="review" rows="3" required>@Model.Book.Review</textarea>
+        </div>
+        <select name="authorId" class="form-control mb-2">
+            @foreach (var author in Model.Authors)
+            {
+                <option value="@author.Id">@author.Name</option>
+            }
+        </select>
+        <select name="categoryId" class="form-control mb-2">
+            @foreach (var categoty in Model.Categories)
+            {
+                <option value="@categoty.Id">@categoty.Name</option>
+            }
+        </select>
+        <div class="form-group">
+            <label for="img">Image</label>
+            <input type="file" class="form-control-file" id="img" name="image" required value="@Model.Book.Image">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+

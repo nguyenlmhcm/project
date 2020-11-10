@@ -1,0 +1,8 @@
+
+<a id="shopping-cart" class="active text-decoration-none mr-3" href="~/Cart"><i id="cart" class="fas fa-shopping-cart"></i>
+@if (ViewBag.Count > 0)
+{
+    <span class="mx-3">@ViewBag.Count - @ViewBag.Price $</span>
+}
+</a>
+

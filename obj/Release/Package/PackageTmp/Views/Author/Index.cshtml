@@ -1,0 +1,45 @@
+@model System.Collections.Generic.List<DoAn1.Models.Author>
+
+@{
+    ViewBag.Title = "Authors";
+    Layout = "~/Views/Shared/_Layout_Home.cshtml";
+}
+
+<div class="container my-5">
+    <table class="table table-bordered text-capitalize text-center" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th></th>
+            <th>Name</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        @foreach (var author in Model)
+        {
+            <tr>
+                <th>
+                    <a class="btn btn-danger" href="~/Author/Details/@author.Id">
+                        <img style="height: 150px;" src="~/Images/Authors/@author.Image" alt="">
+                    </a>
+                </th>
+                <th>@author.Name</th>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log("ready");
+      $("#home").removeClass("active");
+      $("#author").addClass("active");
+    });
+</script>

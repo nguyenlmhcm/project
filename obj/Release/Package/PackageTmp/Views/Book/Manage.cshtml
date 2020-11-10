@@ -1,0 +1,71 @@
+@model System.Collections.Generic.List<DoAn1.Models.Book>
+
+@{
+    ViewBag.Title = "Book Manager";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+<div class="container-fluid my-3">
+    <a href="~/Book/Create" class="btn btn-dark my-3"><span class="fas fa-plus"></span>Add new book</a>
+    
+    <!-- DataTables -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            List Books
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered text-capitalize text-center" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Review</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Review</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    @foreach (var book in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a class="text-decoration-none" href="~/Book/ManagerDetails/@book.Id">
+                                    <img style="height: 200px;" src="~/Images/Books/@book.Image" alt="">
+                                </a>
+                            </td>
+                            <td>@book.Name</td>
+                            <td>@book.Author.Name</td>
+                            <td>@book.Category.Name</td>
+                            <td>@book.Review</td>
+                            <td>@book.Description</td>
+                            <td>$ @book.Price</td>
+                            <th>
+                                <a class="btn btn-danger" href="~/Book/Delete/@book.Id">Delete</a>
+                                <a class="btn btn-info" href="~/Book/Edit/@book.Id">Edit</a>
+                            </th>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

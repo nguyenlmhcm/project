@@ -1,0 +1,47 @@
+@model System.Collections.Generic.List<DoAn1.Models.Account>
+
+@{
+    ViewBag.Title = "Accounts";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<div class="container my-5">
+    <table class="table table-bordered text-capitalize text-center" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th></th>
+        </tr>
+        </tfoot>
+        <tbody>
+        @foreach (var acc in Model)
+        {
+            <tr>
+                <th>@acc.UserName</th>
+                <th>@acc.Name</th>
+                <th>@acc.Address</th>
+                <th>@acc.Phone</th>
+                <th>
+                    @if (!acc.IsAdmin)
+                    {
+                        <a class="btn btn-danger" href="~/Account/AddAdmin/@acc.Id">Add to admin</a>
+
+                    }
+                </th>
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>

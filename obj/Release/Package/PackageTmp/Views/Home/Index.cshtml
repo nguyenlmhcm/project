@@ -1,0 +1,264 @@
+@model DoAn1.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout_Home.cshtml";
+}
+
+  <!-- Discover Tab-->
+<section id="tabDiscover">
+  <h1 class="text-center m-5">Discover Your Next Book</h1>
+  <div class="container">
+
+    <!-- Tab title -->
+    <ul class="nav nav-tabs justify-content-center" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#new">New Releases</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#coming">Coming Soon</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#bestSellers">Best Sellers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#award">Award Winners</a>
+      </li>
+    </ul>
+    
+    <!-- Tab content -->
+    <div class="tab-content text-center">
+      
+      @* New Release *@
+      <div id="new" class="container tab-pane active"><br>
+        <div class="row">
+          @foreach (var item in Model.NewRelease)
+          {
+            <div class="col-lg-2 col-md-3 col-sm-4 text-center text-capitalize">
+              <div class="card">
+                <a href="~/Book/Details/@item.Book.Id">
+                  <img style="margin: 0;padding: 0;" src="~/Images/Books/@item.Book.Image" class="card-img-top">
+                </a>
+                <div class="card-body" style="margin: 0;padding: 0;">
+                  <h5 class="card-title" style="margin: 0;padding: 0;">@item.Book.Name</h5>
+                  <p class="text-danger">$@item.Book.Price</p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      
+      @* Comming *@
+      <div id="coming" class="container tab-pane fade"><br>
+        <div class="row">
+          @foreach (var item in Model.Comming)
+          {
+            <div class="col-lg-2 col-md-3 col-sm-4 text-center text-capitalize">
+              <div class="card">
+                <a href="~/Book/Details/@item.Book.Id">
+                  <img style="margin: 0;padding: 0;" src="~/Images/Books/@item.Book.Image" class="card-img-top">
+                </a>
+                <div class="card-body" style="margin: 0;padding: 0;">
+                  <h5 class="card-title" style="margin: 0;padding: 0;">@item.Book.Name</h5>
+                  <p class="text-danger">$@item.Book.Price</p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      
+      @* best seller *@
+      <div id="bestSellers" class="container tab-pane fade"><br>
+       <div class="row">
+                 @foreach (var item in Model.BestSeller)
+                 {
+                   <div class="col-lg-2 col-md-3 col-sm-4 text-center text-capitalize">
+                     <div class="card">
+                       <a href="~/Book/Details/@item.Book.Id">
+                         <img style="margin: 0;padding: 0;" src="~/Images/Books/@item.Book.Image" class="card-img-top">
+                       </a>
+                       <div class="card-body" style="margin: 0;padding: 0;">
+                         <h5 class="card-title" style="margin: 0;padding: 0;">@item.Book.Name</h5>
+                         <p class="text-danger">$@item.Book.Price</p>
+                       </div>
+                     </div>
+                   </div>
+                 }
+               </div>
+      </div>
+      
+      @* winer *@
+      <div id="award" class="container tab-pane fade"><br>
+        <div class="row">
+          @foreach (var item in Model.Winner)
+          {
+            <div class="col-lg-2 col-md-3 col-sm-4 text-center text-capitalize">
+              <div class="card">
+                <a href="~/Book/Details/@item.Book.Id">
+                  <img style="margin: 0;padding: 0;" src="~/Images/Books/@item.Book.Image" class="card-img-top">
+                </a>
+                <div class="card-body" style="margin: 0;padding: 0;">
+                  <h5 class="card-title" style="margin: 0;padding: 0;">@item.Book.Name</h5>
+                  <p class="text-danger">$@item.Book.Price</p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-5">
+    <a href="~/Book" class="btn btn-lg btn-dark">Discover Now</a>
+  </div>
+</section>
+
+  <!-- email -->
+<section id="emailServices">
+  <div class="pt-5">
+    <h1 class="text-center">Stay In Touch With Our Updates</h1>
+  </div>
+</section>
+
+  <!-- Category -->
+<section id="category" class="mt-3">
+  <h1 class="text-center">Choose Your Book</h1>
+  <hr class="w-25">
+  <div class="container">
+    <div class="row mt-5">
+
+      <div class="col-md-3 col-sm-6">
+        <div class="card" style="height: 200px;">
+          <a href="~/Book/Index/?categoty=1"><img src="http://booklovers.ancorathemes.com/wp-content/uploads/2016/02/cover-1-270x153.jpg" style="height: 150px;" class="card-img-top"></a>
+            <h5 class="card-title text-center mt-2">Drama</h5>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="card" style="height: 200px;">
+          <a href="~/Book/Index/?categoty=2"><img src="http://booklovers.ancorathemes.com/wp-content/uploads/2016/02/cover-2-259x153.jpg" style="height: 150px;" class="card-img-top"></a>
+            <h5 class="card-title text-center mt-2">Roman</h5>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-sm-6">
+        <div class="card" style="height: 200px;">
+          <a href="~/Book/Index/?categoty=3"><img src="http://booklovers.ancorathemes.com/wp-content/uploads/2016/02/cover-3-263x153.jpg" style="height: 150px;" class="card-img-top"></a>
+            <h5 class="card-title text-center mt-2">Biography</h5>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="card" style="height: 200px;">
+          <a href="~/Book/Index/?categoty=4"><img src="http://booklovers.ancorathemes.com/wp-content/uploads/2016/02/cover-4-280x153.jpg" style="height: 150px;" class="card-img-top"></a>
+            <h5 class="card-title text-center mt-2">Cooking</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-4">
+    <a href="~/Book" class="btn btn-lg btn-dark">Discover More Categories</a>
+  </div>
+</section>
+  
+  <!-- Social -->
+  <section id="social" class="mt-5">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-12"></div>
+          <div class="col-md-6 col-sm-12 text-right text-capitalize">
+            <h1 class="mt-5">Inspire Daily Reading</h1>
+            <hr class="w-25 bg-white">
+            <p class="mt-5">Visit our Social Media and page to find out daily inspiration Quotes from the best Authors</p>
+            <a href=""><i class="fab fa-facebook"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Whats New -->
+  <section id="bestSellerSt" class="mt-5">
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-lg-9 col-md-12">
+          <h6>FEATURED BESTSELLERS</h6>
+          <hr class="w-75">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <img class="w-100" src="~/Images/Books/@Model.WhatsNew[0].Book.Image" alt="">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <h2>@Model.WhatsNew[0].Book.Name</h2>
+              <p>@Model.WhatsNew[0].Book.Description</p>
+              <p>Price: <span class="text-danger">@Model.WhatsNew[0].Book.Price $</span></p>
+              <a href="~/Book" class="btn btn-dark mt-5">Read More</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-12 col-sm-12">
+          <h6>What's New</h6>
+          <hr class="w-50">
+          <ul class="list-group">
+            <div class="row">
+              @for (int i = 1; i <= 4; i++)
+              {
+                <li class="list-group-item col-lg-12 col-md-3 col-sm-3">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <img src="~/Images/Books/@Model.WhatsNew[i].Book.Image" alt="" class="w-100">
+                    </div>
+                    <div class="col-lg-6">
+                      <h6>@Model.WhatsNew[i].Book.Name</h6>
+                      <p class="text-danger">@Model.WhatsNew[i].Book.Price $</p>
+                    </div>
+                  </div>
+                </li>
+              }
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Authors -->
+<section id="authors" class="mt-5 text-center text-lighter">
+  <div class="pt-5">
+    <h1>Most Popular Authors</h1>
+    <hr class="w-25">
+  </div>
+  <div class="container">
+    <div class="row mt-5">
+      @foreach (var author in @Model.Author)
+      {
+        <div class="col-sm-3 col-md-2">
+          <figure class="imghvr-slide-up">
+            <img src="~/Images/Authors/@author.Image" class="img-fluid">
+            <figcaption class="hover">
+              <a class="icon" href="">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+              </a>
+            </figcaption>
+          </figure>
+          <a href="" class="mt-3 link">@author.Name</a>
+        </div>
+      }
+    </div>
+    <a href="~/Book" class="btn btn-dark mt-5 mb-5">View More</a>
+  </div>
+</section>
+
+@{
+  ViewBag.Phone = Model.Info.Phone;
+  ViewBag.Address = Model.Info.Address;
+  ViewBag.Email = Model.Info.Email;
+}

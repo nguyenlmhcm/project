@@ -1,0 +1,61 @@
+@model DoAn1.ViewModels.BookDetailViewModel
+@{
+    ViewBag.Title = Model.Book.Name;
+    Layout = "~/Views/Shared/_Layout_Home.cshtml";
+}
+
+<div class="container my-5">
+    
+    @* detail book *@
+    <div class="row">
+        <div class="col-4">
+            <img style="width: 100%" src="~/Images/Books/@Model.Book.Image" alt="">
+        </div>
+        <div class="col-8 text-capitalize">
+            <h2 class="text-primary">@Model.Book.Name</h2>
+            <p><span class="text-info">Author</span>: @Model.Book.Author.Name</p>
+            <p><span class="text-info">Category</span>: @Model.Book.Category.Name</p>
+            <p><span class="text-warning">Description: </span>@Model.Book.Description</p>
+            <p class="text-danger">$ @Model.Book.Price</p>
+            <a href="~/Cart/AddToCart/@Model.Book.Id" class="btn btn-dark"><span class="fas fa-shopping-cart mr-2"></span>Add to Cart</a>
+        </div>
+    </div>
+    
+    @* discover *@
+    <section>
+        <h1 class="text-center m-5">Best Sellers</h1>
+        <div class="container">
+            <div class="text-center text-capitalize">
+                <div class="container">
+                    <br>
+                    <div class="row">
+                        @foreach (var book in Model.Books)
+                        {
+                            <div class="col-lg-2 col-md-3 col-sm-4">
+                                <div class="card">
+                                    <a  href="~/Book/Details/@book.BookId">
+                                        <img src="~/Images/Books/@book.Book.Image" class="card-img-top">
+                                    </a>
+                                    <div style="margin: 0; padding: 0" class="card-body">
+                                        <h5 class="card-title">@book.Book.Name</h5>
+                                        <h6 class="text-danger">$ @Model.Book.Price</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+@* Js *@
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log("ready");
+      $("#home").removeClass("active");
+      $("#book").addClass("active");
+    });
+</script>

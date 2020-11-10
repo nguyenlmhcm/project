@@ -1,0 +1,86 @@
+@model DoAn1.ViewModels.CartViewModel
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout_Home.cshtml";
+}
+
+<div class="container my-5">
+    <h1 class="text-center">Cart Shopping</h1>
+    <hr class="w-75"/>
+    @if (Model == null || Model.Items.Count == 0)
+    {
+        <div style="height: 500px;" class="text-center">
+            <p >Cart Empty</p>
+            <a class="btn btn-dark" href="~/Book">Back to list</a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-6">
+                <form class="form-inline ml-auto my-3" action="~/Cart/Index" method="get">
+                    <input style="border-right: none;" class="form-control" name="coupon" type="text" placeholder="Add a coupon ...">
+                    <button style="border-left: none;" class="form-control" type="submit">
+                        <span class="fas fa-gift"></span>
+                    </button>
+                </form>
+            </div>
+            <div class="col-6">
+                @if (Model.Coupon != null)
+                {
+                    <p class="text-right">Coupon: <span class="text-danger">@Model.Coupon</span></p>
+                }
+            </div>
+        </div>
+        
+        <table class="table table-hover text-capitalize text-center">
+            <thead>
+            <tr>
+                <td></td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td style="width: 100px;">
+                        <img style="width: 100%" src="~/Images/Books/@item.Book.Image" alt="">
+                    </td>
+                    <td>@item.Book.Name</td>
+                    <td>@item.Book.Price $</td>
+                    <td>
+                        <a href="~/Cart/Minus/@item.Book.Id">
+                            <span class="fas fa-minus mr-3"></span>
+                        </a>
+                        @item.Count
+                        <a href="~/Cart/Plus/@item.Book.Id">
+                            <span class="fas fa-plus ml-3"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="~/Cart/RemoveItem/@item.Book.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div class="text-center">
+            <h1 class="text-danger mb-3">@Model.Total $</h1>
+            <a href="~/Cart/SaveOrder" class="btn btn-success">Order</a>
+            <a href="~/Book" class="btn btn-primary">Continous to Buying</a>
+        </div>
+    }
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log("ready");
+      $("#home").removeClass("active");
+      $("#cart").addClass("active");
+    });
+</script>

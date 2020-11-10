@@ -1,0 +1,56 @@
+@model DoAn1.ViewModels.AuthorVM
+
+@{
+    ViewBag.Title = Model.Author.Name;
+    Layout = "~/Views/Shared/_Layout_Home.cshtml";
+}
+
+<div class="container my-5">
+    
+    @* detail *@
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+            <h1>@Model.Author.Name</h1>
+            <img style="width: 100%" src="~/Images/Authors/@Model.Author.Image" alt="">
+        </div>
+        <div class="col"></div>
+    </div>
+    
+    @* discover *@
+    <section>
+        <h1 class="text-center m-5">@Model.Author.Name's Books</h1>
+        <div class="container">
+            <div class="text-center text-capitalize">
+                <div class="container">
+                    <br>
+                    <div class="row">
+                        @foreach (var book in Model.Books)
+                        {
+                            <div class="col-lg-2 col-md-3 col-sm-4">
+                                <div class="card">
+                                    <a  href="~/Book/Details/@book.Id">
+                                        <img src="~/Images/Books/@book.Image" class="card-img-top">
+                                    </a>
+                                    <div style="margin: 0; padding: 0" class="card-body">
+                                        <h5 class="card-title">@book.Name</h5>
+                                        <h6 class="text-danger">$ @book.Price</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log("ready");
+      $("#home").removeClass("active");
+      $("#author").addClass("active");
+    });
+</script>

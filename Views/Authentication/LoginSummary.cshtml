@@ -1,0 +1,14 @@
+@model DoAn1.Models.Account
+
+@if (Model == null)
+{
+    <a id="login" data-toggle="modal" data-target="#myModal" class="ml-3" href="">
+        <i style="font-size: 23px;" class="fas fa-sign-in-alt"></i>
+    </a>
+}
+else
+{
+    <a id="login" class="ml-3" href="~/Account/Index/@Model.Id">
+        <i style="font-size: 23px;"  class="fas fa-user"></i>
+    </a>
+}

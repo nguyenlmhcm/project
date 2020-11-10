@@ -1,0 +1,28 @@
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout_Home.cshtml";
+}
+
+<div class="row" style="margin:50px 0 200px 0">
+    <div class="col"></div>
+    <div class="col-5">
+        <h1 class="text-info my-3 text-center">Login</h1>
+        <form action="~/Authentication/Authen" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                <small id="emailHelp" class="form-text text-muted">Done miss your password.</small>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary mr-5">Login</button>
+                <a class="btn btn-default" href="~/Home">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <div class="col"></div>
+</div>

@@ -1,0 +1,58 @@
+@model System.Collections.Generic.List<DoAn1.Models.Cart>
+
+@{
+    ViewBag.Title = "Carts";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<div class="container my-5">
+    <table class="table table-bordered text-capitalize text-center" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Books</th>
+            <th>Coupon</th>
+            <th>Discount</th>
+            <th>Total</th>
+            <th>Date Order</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Books</th>
+            <th>Coupon</th>
+            <th>Discount</th>
+            <th>Total</th>
+            <th>Date Order</th>
+            <th>Status</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        @foreach (var cart in Model)
+        {
+            <tr>
+                <td>
+                    <a class="text-decoration-none" href="~/Cart/Details/@cart.Id">@cart.Account.Name</a>
+                </td>
+                <td>@cart.TotalItem</td>
+                <td>@cart.Coupon.Code</td>
+                <td>@cart.Coupon.Percents %</td>
+                <td>$@cart.TotalPrice</td>
+                <td>@cart.DateOrder.ToString("yyyy MMMM dd")</td>
+                <th>
+                    @if(cart.IsShiped)
+                    {
+                        <div>Shiped !!!</div>
+                    }
+                    else
+                    {
+                        <div class="text-danger">Not ship yet..</div>
+                    }
+                </th>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
